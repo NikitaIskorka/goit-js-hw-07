@@ -7,7 +7,8 @@ function onFocusValidation(event) {
   if (event.currentTarget.value.length === +tresholdLength) {
     inputRef.setAttribute('class', 'valid');
   } else if (event.currentTarget.value === '') {
-    inputRef.classList.remove('.invalid');
+    console.log(event.currentTarget.value);
+    inputRef.classList.remove('.invalid', 'valid');
   } else {
     inputRef.setAttribute('class', 'invalid');
   }

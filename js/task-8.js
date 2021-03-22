@@ -13,22 +13,38 @@
 Каждый следующий div после первого, должен быть шире и выше предыдущего на 10px
 Создай функцию destroyBoxes(), которая очищает div#boxes. */
 
-// const inputRef = document.querySelector('#controls>input');
-// const renderBtn = document.querySelector('[data-action="render"]');
-// const destroyBtn = document.querySelector('[data-action="destroy"]');
-// const markupContainer = document.querySelector('#boxes');
+const inputRef = document.querySelector('#controls>input');
+const renderBtn = document.querySelector('[data-action="render"]');
+const destroyBtn = document.querySelector('[data-action="destroy"]');
+const markupContainer = document.querySelector('#boxes');
 
-// inputRef.addEventListener(
-//   'input',
-//   event => console.log(event.currentTarget.value),
-//   renderBtn.addEventListener('click', createBoxes),
-// );
-// function createBoxes() {}
-// const renderedMarkup = document.createElement('div');
-// renderedMarkup.style.background = 'tomato';
+const boxesArray = [];
 
-// renderedMarkup.setAttribute('width', '30px');
-// renderedMarkup.setAttribute('heigth', '30px');
-// markupContainer.appendChild(renderedMarkup);
-// console.log(rergderedMarkup);
-// console.dir(renderedMarkup);
+inputRef.addEventListener('change', event => {
+  renderBtn.addEventListener(
+    'click',
+    makeRandomColorBoxesMarkup(event.currentTarget.value),
+  );
+});
+destroyBtn.addEventListener('click', clearRandomColorBoxesMarkup);
+
+function makeRandomColorBoxesMarkup(event) {
+  for (let i = 0; i < event; i += 1) {
+    const boxElement = document.createElement('div');
+    boxElement.classList.add('random-boxes-js');
+    boxElement.style.width = i * 10 + 30 + 'px';
+    boxElement.style.height = i * 10 + 30 + 'px';
+    boxElement.style.backgroundColor = `rgb(${getRandom(0, 255)},
+     ${getRandom(0, 255)}, ${getRandom(0, 255)})`;
+
+    function getRandom(min, max) {
+      return Math.ceil(Math.random() * (max - min) + min);
+    }
+    boxesArray.push(boxElement);
+  }
+  markupContainer.append(...boxesArray);
+}
+function clearRandomColorBoxesMarkup() {
+  markupContainer.innerHTML = '';
+  inputRef.value = '';
+}
