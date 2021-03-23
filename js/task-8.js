@@ -12,13 +12,12 @@
 Размеры самого первого div - 30px на 30px
 Каждый следующий div после первого, должен быть шире и выше предыдущего на 10px
 Создай функцию destroyBoxes(), которая очищает div#boxes. */
-
 const inputRef = document.querySelector('#controls>input');
 const renderBtn = document.querySelector('[data-action="render"]');
 const destroyBtn = document.querySelector('[data-action="destroy"]');
 const markupContainer = document.querySelector('#boxes');
 
-const boxesArray = [];
+let boxesArray = [];
 
 inputRef.addEventListener('change', event => {
   renderBtn.addEventListener(
@@ -47,4 +46,6 @@ function makeRandomColorBoxesMarkup(event) {
 function clearRandomColorBoxesMarkup() {
   markupContainer.innerHTML = '';
   inputRef.value = '';
+  boxesArray = [];
 }
+console.log(boxesArray);
