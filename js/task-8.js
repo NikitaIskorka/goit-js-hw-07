@@ -18,27 +18,26 @@ const destroyBtn = document.querySelector('[data-action="destroy"]');
 const markupContainer = document.querySelector('#boxes');
 
 let boxesArray = [];
+//
 
-inputRef.addEventListener('change', event => {
-  renderBtn.addEventListener(
-    'click',
-    makeRandomColorBoxesMarkup(event.currentTarget.value),
-  );
+renderBtn.addEventListener('click', () => {
+  makeRandomColorBoxesMarkup(inputRef.value);
 });
-destroyBtn.addEventListener('click', clearRandomColorBoxesMarkup);
 
-function makeRandomColorBoxesMarkup(event) {
-  for (let i = 0; i < event; i += 1) {
+destroyBtn.addEventListener('click', clearRandomColorBoxesMarkup);
+function setRandomColor() {
+  const getRandomNumber = () => Math.floor(Math.random() * (255 - 0) + 0);
+  return `rgb(${getRandomNumber()},${getRandomNumber()}, ${getRandomNumber()})`;
+}
+
+function makeRandomColorBoxesMarkup(value) {
+  clearRandomColorBoxesMarkup();
+  for (let i = 0; i < value; i += 1) {
     const boxElement = document.createElement('div');
     boxElement.classList.add('random-boxes-js');
     boxElement.style.width = i * 10 + 30 + 'px';
     boxElement.style.height = i * 10 + 30 + 'px';
-    boxElement.style.backgroundColor = `rgb(${getRandom(0, 255)},
-     ${getRandom(0, 255)}, ${getRandom(0, 255)})`;
-
-    function getRandom(min, max) {
-      return Math.ceil(Math.random() * (max - min) + min);
-    }
+    boxElement.style.backgroundColor = setRandomColor();
     boxesArray.push(boxElement);
   }
   markupContainer.append(...boxesArray);
@@ -48,4 +47,5 @@ function clearRandomColorBoxesMarkup() {
   inputRef.value = '';
   boxesArray = [];
 }
+
 console.log(boxesArray);
