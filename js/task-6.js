@@ -8,7 +8,7 @@ function onFocusValidation(event) {
     inputRef.setAttribute('class', 'valid');
   } else if (event.currentTarget.value === '') {
     console.log(event.currentTarget.value);
-    inputRef.classList.remove('.invalid', 'valid');
+    inputRef.removeAttribute('class');
   } else {
     inputRef.setAttribute('class', 'invalid');
   }

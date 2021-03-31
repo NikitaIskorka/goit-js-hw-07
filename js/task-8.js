@@ -47,5 +47,3 @@ function clearRandomColorBoxesMarkup() {
   inputRef.value = '';
   boxesArray = [];
 }
-
-console.log(boxesArray);
